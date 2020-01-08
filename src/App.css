@@ -1,0 +1,29 @@
+.app {
+  height: 100vh;
+  display: flex;
+}
+
+.wrapper {
+  margin-top: 50px;
+}
+
+
+
+
+/* FOOTER */  
+.nav {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 15px;
+}
+.nav > a {
+  margin-right: 15px;
+}
+
+.isActive {
+  border: 1px solid #26a69a   ;
+  padding: 2px 8px;
+  color: #26a69a  ; 
+  border-radius: 5px;
+}
