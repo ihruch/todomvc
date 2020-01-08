@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Form = () => {
+const Form = (props) => {
+    console.log(props);
     return(
         <div className="input-field">
           <input 

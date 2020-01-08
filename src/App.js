@@ -1,15 +1,39 @@
 import React from 'react';
-import { Route, Switch, NavLink} from 'react-router-dom';
 
 import Main from './Components/Main';
 import Form from './Components/Form';
+import Navlink from './Components/Navlink';
 
 import 'materialize-css';
 import './App.css';
 
 
 class App extends React.Component {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        task: '',
+        count: 1, 
+        list: [],
+      }
+
+    }
+
+  handleSubmit = () => {
+
+  } 
+
+  handleChange = () => {
+
+  }
+
+  removeItem = () => {
+
+  }
+
   render() {
+    const { task, count, list } = this.state;
 
     return (
       <div className="container">
@@ -17,18 +41,19 @@ class App extends React.Component {
 
           <div className="col s12  wrapper" >
             <header className="header">
-                <Form />
+              <Form onChange={this.handleSubmit} onSubmit={this.handleChange} />
             </header>
 
-            <main className="body grey lighten-5">
-              <Main />              
-              <div class="divider"></div> 
-              <div className="nav">
-                <NavLink to="/" exact activeClassName="isActive ">all</NavLink>
-                <NavLink to="/completed" activeClassName="isActive  ">completed</NavLink>
-                <NavLink to="/non-completed" activeClassName="isActive ">non-completed</NavLink>
-              </div>
-            </main>
+            {list.length? 
+              <main className="body grey lighten-5">
+                <Main />              
+                <div className="divider"></div> 
+                <div className="nav">
+                  <Navlink />
+                </div>
+              </main>
+              : 
+              null }
             
           </div> 
         </div>
