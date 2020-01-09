@@ -1,8 +1,7 @@
 import React from 'react';
 import ListItem from '../ListItem';
 
-const List = ({list, filter, ...props}) => {
-    console.log('props List', props);
+const List = ({list, filter, ...rest}) => {
 
     const filterList = (list) => {
         switch(filter) {
@@ -18,23 +17,17 @@ const List = ({list, filter, ...props}) => {
         }           
     }
 
-    return(
-        <ul className="collection">
-            {
-                filterList(list).map( item => <ListItem key={item.id} {...item}/> )
-            }
-        </ul>
-        
-    );
+    if( filterList(list).length ) {
+        return (
+            <ul className="collection">
+                {
+                    filterList(list).map( item => <ListItem key={item.id} item={item} {...rest}/> )
+                }
+            </ul>     
+        );
+    }else{
+        return null;
+    }   
 }
 
 export default List;
-
-/*
- <li class="collection-item">
-  <div>Alvin
-    <a href="#!" class="secondary-content">
-        <i class="material-icons">send
-        </i>
-    </a>
-    </div> */

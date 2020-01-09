@@ -8,28 +8,63 @@ import 'materialize-css';
 import './App.css';
 
 
+
 class App extends React.Component {
     constructor(props) {
       super(props);
 
       this.state = {
         task: '',
-        count: 1, 
+        id: 1, 
         list: [],
       }
 
     }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { task, id } = this.state;
 
+    const newTask = {
+      id,
+      text: task, 
+      completed: false
+    }
+    this.setState( prevState => {     
+      return {
+        task: '',
+        id: prevState.id + 1, 
+        list: [...prevState.list, newTask],
+      }      
+    })
   } 
 
-  handleChange = () => {
-
+  handleChange = (e) => {
+    e.preventDefault();
+   console.log('e', e.target)
+   
+  //  const {name, value, type, checked} = event.target
+  //   type === "checkbox" ? 
+  //       this.setState({
+  //           [name]: checked
+  //       })
+  //   :
+  //   this.setState({
+  //       [name]: value
+  //   }) 
+    
+    const { value, type } = e.target;
+    if(type === 'checkbox') {
+      console.log(e.target.data)
+    }
+    this.setState({ task: value})
   }
 
-  removeItem = () => {
-
+  removeTask = (id) => {
+    const {list} = this.state;
+    this.setState({
+      list: list.filter( item => item.id !== id)
+    });    
   }
 
   render() {
@@ -41,12 +76,12 @@ class App extends React.Component {
 
           <div className="col s12  wrapper" >
             <header className="header">
-              <Form onChange={this.handleSubmit} onSubmit={this.handleChange} />
+              <Form onChange={this.handleChange} onSubmit={this.handleSubmit} value={task} />
             </header>
 
             {list.length? 
               <main className="body grey lighten-5">
-                <Main />              
+                <Main list = {list}  removeTask={this.removeTask} handleChange={this.handleChange}/>              
                 <div className="divider"></div> 
                 <div className="nav">
                   <Navlink />

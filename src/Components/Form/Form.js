@@ -1,15 +1,16 @@
 import React from 'react';
 
-const Form = (props) => {
-    console.log(props);
+const Form = ({...props}) => {
+ // console.log('FORM props', props)
     return(
-        <div className="input-field">
-          <input 
-            placeholder="Enter your task" 
-            type="text" 
-            name="task"
-            />
-        </div>
+      <form {...props}> 
+        <input 
+          placeholder="Enter your task" 
+          type="text" 
+          name="task"          
+          {...props}
+        />
+      </form>
     );
 }
 
