@@ -37,26 +37,25 @@ class App extends React.Component {
         list: [...prevState.list, newTask],
       }      
     })
+  }
+
+
+  handleCheckbox = (id) => {
+    const { list } = this.state;
+    
+    const newList = list.map( elem => {  
+      if(elem.id === id) {elem.completed = !elem.completed};
+      return elem;       
+    })
+    console.log('newList', newList);
+    this.setState({ list: newList})
   } 
 
   handleChange = (e) => {
     e.preventDefault();
-   console.log('e', e.target)
+    console.log('e', e.target)
    
-  //  const {name, value, type, checked} = event.target
-  //   type === "checkbox" ? 
-  //       this.setState({
-  //           [name]: checked
-  //       })
-  //   :
-  //   this.setState({
-  //       [name]: value
-  //   }) 
-    
-    const { value, type } = e.target;
-    if(type === 'checkbox') {
-      console.log(e.target.data)
-    }
+    const { value } = e.target;
     this.setState({ task: value})
   }
 
@@ -68,20 +67,20 @@ class App extends React.Component {
   }
 
   render() {
-    const { task, count, list } = this.state;
+    const { task, list } = this.state;
 
     return (
       <div className="container">
         <div className="row">
 
-          <div className="col s12  wrapper" >
+          <div className="col s12 wrapper" >
             <header className="header">
               <Form onChange={this.handleChange} onSubmit={this.handleSubmit} value={task} />
             </header>
 
             {list.length? 
               <main className="body grey lighten-5">
-                <Main list = {list}  removeTask={this.removeTask} handleChange={this.handleChange}/>              
+                <Main list = {list}  removeTask={this.removeTask} handleCheckbox={this.handleCheckbox}/>              
                 <div className="divider"></div> 
                 <div className="nav">
                   <Navlink />

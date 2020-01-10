@@ -21,16 +21,15 @@ const InnerLi = styled.div`
     align-items: center;
 `;
 
-const  ListItem = ({item, removeTask, handleChange, ...rest }) => {
-    console.log('props', rest)
+const  ListItem = ({item, removeTask, handleCheckbox, ...rest }) => {
+    console.log('ListItem props', item.completed)
     
     return (
         <Li  >
-            <div>
-                <input id="indeterminate-checkbox" type="checkbox" checked="false" /> 
+            <label>     
+                <input type="checkbox" onChange={() => handleCheckbox(item.id)} checked={item.completed} /> 
                 <span>{item.id}. {item.text}</span>
-                
-            </div>           
+            </label>           
             <i className="material-icons"  onClick={() => removeTask(item.id)}>delete_forever</i>  
         </Li> 
     );
